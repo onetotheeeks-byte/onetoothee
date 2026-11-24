@@ -7,10 +7,10 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     * {
-      font-family: 'Prompt', 'Kanit', sans-serif;
+      font-family: 'IBM Plex Sans Thai', sans-serif;
       box-sizing: border-box;
     }
 
@@ -56,24 +56,11 @@
 
     /* โคมลอยบนท้องฟ้า */
     @keyframes floatLantern {
-      0% {
-        transform: translateY(20px) translateX(0px) scale(0.85);
-        opacity: 0;
-      }
-      15% {
-        opacity: 0.85;
-      }
-      50% {
-        transform: translateY(-130px) translateX(var(--drift, 18px)) scale(0.95);
-        opacity: 0.9;
-      }
-      85% {
-        opacity: 0.65;
-      }
-      100% {
-        transform: translateY(-290px) translateX(calc(var(--drift, 18px) * -0.5)) scale(0.75);
-        opacity: 0;
-      }
+      0% { transform: translateY(20px) translateX(0px) scale(0.85); opacity: 0; }
+      15% { opacity: 0.85; }
+      50% { transform: translateY(-130px) translateX(var(--drift, 18px)) scale(0.95); opacity: 0.9; }
+      85% { opacity: 0.65; }
+      100% { transform: translateY(-290px) translateX(calc(var(--drift, 18px) * -0.5)) scale(0.75); opacity: 0; }
     }
 
     .sky-lantern {
@@ -141,7 +128,6 @@
       border-color: rgba(254, 240, 138, 0.35);
     }
 
-    /* กระทงลอยเลื่อนจากขวาไปซ้ายด้วย JS */
     .krathong-item {
       position: absolute;
       left: 0;
@@ -164,7 +150,6 @@
       box-shadow: 0 0 20px rgba(251, 191, 36, 0.35);
     }
 
-    /* เปลวเทียนกระพริบ */
     @keyframes candleFlicker {
       0%, 100% { transform: scaleY(1) scaleX(1); opacity: 0.95; }
       50% { transform: scaleY(1.14) scaleX(0.92); opacity: 1; }
@@ -175,7 +160,6 @@
       animation: candleFlicker 0.9s ease-in-out infinite;
     }
 
-    /* เอฟเฟกต์แสงวิบวับตอนปล่อยกระทง */
     .sparkle-burst {
       position: fixed;
       pointer-events: none;
@@ -190,7 +174,6 @@
       100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
     }
 
-    /* เอฟเฟกต์ระลอกคลื่นตอนแตะผิวน้ำ */
     .tap-water-ring {
       position: absolute;
       border-radius: 9999px;
@@ -203,17 +186,10 @@
     }
 
     @keyframes tapWaveExpand {
-      0% {
-        transform: translate(-50%, -50%) scale(0.2);
-        opacity: 0.95;
-      }
-      100% {
-        transform: translate(-50%, -50%) scale(2.4);
-        opacity: 0;
-      }
+      0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0.95; }
+      100% { transform: translate(-50%, -50%) scale(2.4); opacity: 0; }
     }
 
-    /* พลุเฉลิมฉลองบนท้องฟ้า */
     .firework-particle {
       position: fixed;
       border-radius: 50%;
@@ -228,7 +204,6 @@
       100% { transform: translate(var(--fw-x), var(--fw-y)) translateY(28px) scale(0.15); opacity: 0; }
     }
 
-    /* แสงออร่าสีทองสำหรับกระทงยอดนิยม Top 1-3 */
     .top-krathong-aura {
       position: relative;
     }
@@ -249,7 +224,6 @@
       100% { transform: scale(1.1); opacity: 1; }
     }
 
-    /* สปอตไลต์ชี้กระทงของฉัน */
     .spotlight-beacon {
       position: absolute;
       inset: -26px;
@@ -266,7 +240,6 @@
       100% { transform: scale(1.14) rotate(15deg); opacity: 1; }
     }
 
-    /* แอนิเมชันเขย่าโถเสี่ยงทายสไตล์ไทย */
     .thai-fortune-pot {
       transform-origin: 50% 85%;
       cursor: pointer;
@@ -305,28 +278,17 @@
       100% { transform: translateY(0px) scale(1); opacity: 1; }
     }
 
-    /* Custom Scrollbar */
-    .custom-scroll::-webkit-scrollbar {
-      width: 6px;
-    }
-    .custom-scroll::-webkit-scrollbar-track {
-      background: rgba(15, 23, 42, 0.4);
-      border-radius: 9999px;
-    }
-    .custom-scroll::-webkit-scrollbar-thumb {
-      background: rgba(251, 191, 36, 0.35);
-      border-radius: 9999px;
-    }
+    .custom-scroll::-webkit-scrollbar { width: 6px; }
+    .custom-scroll::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.4); border-radius: 9999px; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: rgba(251, 191, 36, 0.35); border-radius: 9999px; }
   </style>
 </head>
 <body class="night-sky relative w-full h-full overflow-hidden">
 
   <!-- ชั้นท้องฟ้า ดวงดาว พระจันทร์ โคมลอย และแสงพลุ -->
   <div id="skyLayer" class="absolute inset-x-0 top-0 h-[52%] overflow-hidden cursor-crosshair">
-    <!-- ดวงจันทร์เต็มดวง -->
     <div class="full-moon absolute top-16 right-6 sm:top-16 sm:right-20 w-20 h-20 sm:w-28 sm:h-28 rounded-full pointer-events-none"></div>
 
-    <!-- เงาทิวทัศน์ริมฝั่งแม่น้ำเจ้าพระยา -->
     <svg class="absolute bottom-0 left-0 w-full h-24 sm:h-32 text-[#050a19] opacity-95 pointer-events-none" viewBox="0 0 1440 160" preserveAspectRatio="none" fill="currentColor">
       <path d="M0,160 L0,115 Q120,95 240,118 T480,112 T720,120 T960,108 T1200,118 L1440,106 L1440,160 Z"></path>
       <path d="M1140,112 L1140,78 L1152,64 L1164,78 L1164,112 Z" opacity="0.85"></path>
@@ -368,7 +330,7 @@
           ลอยกระทงคืนวันเพ็ญ
         </h1>
         <p class="text-[10px] sm:text-xs text-slate-300/80 flex items-center gap-1 truncate">
-          <span id="liveDot" class="inline-block w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 animate-pulse flex-none"></span>
+          <span id="liveDot" class="inline-block w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-400 flex-none"></span>
           <span id="statusText" class="truncate">กำลังเชื่อมต่อสายน้ำ...</span>
           <span class="text-amber-300/80 flex-none">•</span>
           <span id="totalKrathongCount" class="font-medium text-amber-200 flex-none">0 กระทง</span>
@@ -578,30 +540,23 @@
             <g class="chim-sticks-group">
               <rect x="46" y="18" width="7" height="72" rx="2" transform="rotate(-12 49 54)" fill="url(#thaiStickGrad)"/>
               <rect x="44" y="16" width="7" height="14" rx="1.5" transform="rotate(-12 47 23)" fill="#f59e0b"/>
-
               <rect x="57" y="12" width="7" height="78" rx="2" transform="rotate(-6 60 51)" fill="url(#thaiStickGrad)"/>
               <rect x="56" y="10" width="7" height="15" rx="1.5" transform="rotate(-6 59 17)" fill="#f59e0b"/>
-
               <rect x="69" y="8" width="7" height="82" rx="2" transform="rotate(-2 72 49)" fill="url(#thaiStickGrad)"/>
               <rect x="68" y="6" width="7" height="16" rx="1.5" transform="rotate(-2 71 14)" fill="#f59e0b"/>
-
               <rect x="81" y="10" width="7" height="80" rx="2" transform="rotate(3 84 50)" fill="url(#thaiStickGrad)"/>
               <rect x="80" y="8" width="7" height="15" rx="1.5" transform="rotate(3 83 15)" fill="#f59e0b"/>
-
               <rect x="93" y="14" width="7" height="76" rx="2" transform="rotate(8 96 52)" fill="url(#thaiStickGrad)"/>
               <rect x="92" y="12" width="7" height="14" rx="1.5" transform="rotate(8 95 19)" fill="#f59e0b"/>
-
               <rect x="104" y="20" width="7" height="70" rx="2" transform="rotate(13 107 55)" fill="url(#thaiStickGrad)"/>
               <rect x="103" y="18" width="7" height="13" rx="1.5" transform="rotate(13 106 24)" fill="#f59e0b"/>
             </g>
 
             <ellipse cx="80" cy="64" rx="38" ry="10" fill="#1c0a02"/>
             <path d="M42,64 Q33,115 41,162 Q80,175 119,162 Q127,115 118,64 Q80,75 42,64 Z" fill="url(#thaiTeakWood)"/>
-
             <path d="M41,64 Q80,75 119,64 L120,73 Q80,84 40,73 Z" fill="url(#thaiGoldTrim)"/>
             <path d="M37,114 Q80,126 123,114 L123,121 Q80,133 37,121 Z" fill="url(#thaiGoldTrim)" opacity="0.92"/>
             <path d="M40,156 Q80,169 120,156 L120,165 Q80,178 40,165 Z" fill="url(#thaiGoldTrim)"/>
-
             <path d="M62,92 Q71,82 80,92 Q89,82 98,92 Q89,102 80,94 Q71,102 62,92 Z" fill="none" stroke="#fde047" stroke-width="1.6"/>
             <circle cx="80" cy="141" r="10" fill="#2c1002" stroke="#fbbf24" stroke-width="1.5"/>
             <circle cx="80" cy="141" r="3.5" fill="#fde047"/>
@@ -663,7 +618,7 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
     import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-    import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, increment, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, increment, serverTimestamp, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
     const KRATHONG_TYPES = [
       {
@@ -785,17 +740,16 @@
     ];
 
     // =========================================================================
-    // 👇 หากนำไปโฮสต์เว็บภายนอก (เช่น GitHub Pages / Cloudflare Pages / Netlify Drop)
-    //    ให้นำค่า firebaseConfig จาก Firebase Console มาใส่ใน MANUAL_FIREBASE_CONFIG
-    //    เพื่อให้ทุกคนที่เปิดลิงก์เห็นกระทงและยอดถูกใจแบบออนไลน์ข้ามเครื่องครับ
+    // 👇 ค่า firebaseConfig จากโปรเจกต์ loy-krathong-online-c18a0 ของคุณ
     // =========================================================================
     const MANUAL_FIREBASE_CONFIG = {
-      apiKey: "",
-      authDomain: "",
-      projectId: "",
-      storageBucket: "",
-      messagingSenderId: "",
-      appId: ""
+      apiKey: "AIzaSyCgebbhRr3I5QTk1GGONPb7vPnVE96HNs4",
+      authDomain: "loy-krathong-online-c18a0.firebaseapp.com",
+      projectId: "loy-krathong-online-c18a0",
+      storageBucket: "loy-krathong-online-c18a0.firebasestorage.app",
+      messagingSenderId: "54790537791",
+      appId: "1:54790537791:web:36089cb73d532af2cc6e8a",
+      measurementId: "G-C919T8GG0V"
     };
 
     const hasInjectedFirebase = typeof __firebase_config !== 'undefined' && Boolean(__firebase_config);
@@ -825,9 +779,9 @@
     let isCloudSynced = false;
     let unsubscribeSnapshot = null;
 
-    const STORAGE_KRATHONGS_KEY = 'loy_krathong_local_items_v1';
-    const STORAGE_LIKED_KEY = 'loy_krathong_liked_ids_v1';
-    const STORAGE_OWNED_KEY = 'loy_krathong_owned_ids_v1';
+    const STORAGE_KRATHONGS_KEY = 'loy_krathong_local_items_v2';
+    const STORAGE_LIKED_KEY = 'loy_krathong_liked_ids_v2';
+    const STORAGE_OWNED_KEY = 'loy_krathong_owned_ids_v2';
 
     let localKrathongs = JSON.parse(localStorage.getItem(STORAGE_KRATHONGS_KEY) || '[]');
     const likedIds = new Set(JSON.parse(localStorage.getItem(STORAGE_LIKED_KEY) || '[]'));
@@ -835,15 +789,13 @@
 
     function persistLocalState() {
       try {
-        localStorage.setItem(STORAGE_KRATHONGS_KEY, JSON.stringify(localKrathongs.slice(0, 60)));
+        localStorage.setItem(STORAGE_KRATHONGS_KEY, JSON.stringify(localKrathongs.slice(0, 100)));
         localStorage.setItem(STORAGE_LIKED_KEY, JSON.stringify([...likedIds]));
         localStorage.setItem(STORAGE_OWNED_KEY, JSON.stringify([...myOwnedIds]));
-      } catch (e) {
-        // ข้ามหากพื้นที่เก็บข้อมูลเต็ม
-      }
+      } catch (e) {}
     }
 
-    // --- 1. ระบบเสียงเพลงบรรเลงทำนองวันเพ็ญเดือนสิบสอง (Web Audio API) ---
+    // --- 1. ระบบเสียงเพลงบรรเลง ---
     class LoyKrathongMusicEngine {
       constructor() {
         this.ctx = null;
@@ -939,7 +891,7 @@
 
     const musicEngine = new LoyKrathongMusicEngine();
 
-    // --- 2. สร้างบรรยากาศท้องฟ้า ดวงดาว โคมลอย พลุ และแม่น้ำ ---
+    // --- 2. บรรยากาศท้องฟ้าและสายน้ำ ---
     function launchFirework(x, y, count = 24) {
       const palette = ['#fef08a', '#fda4af', '#93c5fd', '#86efac', '#fcd34d', '#f9a8d4'];
       for (let i = 0; i < count; i++) {
@@ -1055,7 +1007,7 @@
       }
     }
 
-    // --- 3. ระบบ State & UI Helpers ---
+    // --- 3. State & UI Helpers ---
     let selectedType = 'krathong-1';
     let krathongsList = [];
     let activeDetailId = null;
@@ -1103,7 +1055,7 @@
       return KRATHONG_TYPES.find(t => t.id === typeId) || KRATHONG_TYPES[0];
     }
 
-    // --- 4. สร้างตัวเลือกกระทง 4 แบบและพรีวิว ---
+    // --- 4. ตัวเลือกกระทง 4 แบบ ---
     function renderKrathongTypeSelector() {
       const grid = document.getElementById('krathongTypeGrid');
       grid.innerHTML = '';
@@ -1143,9 +1095,9 @@
       document.getElementById('krathongPreviewDesc').textContent = info.desc;
     }
 
-    // --- 5. ระบบกระทงลอยบนสายน้ำเจ้าพระยา (5 เลน ขวาไปซ้าย ไม่ซ้อนทับ) ---
+    // --- 5. กระทงลอยบนสายน้ำ ---
     const riverEntities = new Map();
-    const MAX_RIVER_KRATHONGS = 24;
+    const MAX_RIVER_KRATHONGS = 30;
 
     const RIVER_LANES = [
       { topPct: 10, scale: 0.78, speed: 24, zIndex: 12 },
@@ -1320,7 +1272,6 @@
       showToast(`ส่องสปอตไลต์ไปยังกระทงของ "${item ? item.name : 'คุณ'}" แล้ว 📍`);
     }
 
-    // --- 5b. ระบบกระบอกเสี่ยงทายสไตล์ไทย & กระดาน 1-12 ---
     function playChimShakeSound() {
       try {
         const AudioCtx = window.AudioContext || window.webkitAudioContext;
@@ -1340,9 +1291,7 @@
           osc.start(ctx.currentTime + offset);
           osc.stop(ctx.currentTime + offset + 0.08);
         });
-      } catch (e) {
-        // ข้ามหากเบราว์เซอร์บล็อกเสียง
-      }
+      } catch (e) {}
     }
 
     function shakeChineseChimTube() {
@@ -1457,7 +1406,7 @@
     }
     requestAnimationFrame(animateRiverLoop);
 
-    // --- 6. กระดานข้อความและปุ่มกดถูกใจ ---
+    // --- 6. กระดานข้อความ ---
     function renderWishBoard() {
       const listEl = document.getElementById('wishFeedList');
       const q = searchQuery.trim().toLowerCase();
@@ -1571,7 +1520,7 @@
       drawer.classList.remove('flex');
     }
 
-    // --- 7. การกดถูกใจและบันทึกกระทงแบบเรียลไทม์ ---
+    // --- 7. กดถูกใจและซิงก์คลาวด์ ---
     async function toggleLikeKrathong(id) {
       if (!id) return;
       const currentlyLiked = likedIds.has(id);
@@ -1648,8 +1597,10 @@
     function startRealtimeListener() {
       if (unsubscribeSnapshot) return;
       const colRef = collection(db, 'artifacts', appId, 'public', 'data', 'krathongs');
+      const q = query(colRef, orderBy('createdAt', 'desc'), limit(100));
+
       unsubscribeSnapshot = onSnapshot(
-        colRef,
+        q,
         (snapshot) => {
           isCloudSynced = true;
           document.getElementById('liveDot').className = 'inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-none';
@@ -1668,7 +1619,7 @@
           console.warn('ใช้งานโหมดในเครื่องชั่วคราว:', error);
           isCloudSynced = false;
           document.getElementById('liveDot').className = 'inline-block w-2 h-2 rounded-full bg-amber-400 flex-none';
-          document.getElementById('statusText').textContent = 'โหมดในเครื่อง (ตั้งค่า Firebase เพื่อซิงก์ข้ามเครื่อง)';
+          document.getElementById('statusText').textContent = 'โหมดในเครื่อง (ต้องใส่ค่า Firebase เพื่อซิงก์ข้ามเครื่อง)';
           handleKrathongsUpdated(localKrathongs);
         }
       );
@@ -1678,7 +1629,7 @@
       if (!isCloudEnabled) {
         isCloudSynced = false;
         document.getElementById('liveDot').className = 'inline-block w-2 h-2 rounded-full bg-amber-400 flex-none';
-        document.getElementById('statusText').textContent = 'โหมดในเครื่อง (ตั้งค่า Firebase เพื่อซิงก์ข้ามเครื่อง)';
+        document.getElementById('statusText').textContent = 'โหมดในเครื่อง (ต้องใส่ค่า Firebase เพื่อซิงก์ข้ามเครื่อง)';
         handleKrathongsUpdated(localKrathongs);
         return;
       }
@@ -1700,7 +1651,7 @@
         console.warn('ไม่สามารถเชื่อมต่อระบบยืนยันตัวตนคลาวด์ได้ ใช้โหมดในเครื่อง:', err);
         isCloudSynced = false;
         document.getElementById('liveDot').className = 'inline-block w-2 h-2 rounded-full bg-amber-400 flex-none';
-        document.getElementById('statusText').textContent = 'โหมดในเครื่อง (ตั้งค่า Firebase เพื่อซิงก์ข้ามเครื่อง)';
+        document.getElementById('statusText').textContent = 'โหมดในเครื่อง (ต้องใส่ค่า Firebase เพื่อซิงก์ข้ามเครื่อง)';
         handleKrathongsUpdated(localKrathongs);
       }
     }
