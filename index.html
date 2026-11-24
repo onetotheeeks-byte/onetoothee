@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ลอยกระทง - Loy Krathong Online</title>
+  <title>Loy Krathong Online</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -472,7 +472,7 @@
       <div class="flex items-center justify-between mb-3">
         <div>
           <h2 class="text-lg sm:text-xl font-bold text-amber-200">กระทงทั้งหมดในสายน้ำ</h2>
-          <p class="text-xs text-slate-400">ข้อความที่ลอยอยู่ในแม่น้ำคืนนี้แบบเรียลไทม์</p>
+          <p class="text-xs text-slate-400">ข้อความที่ลอยอยู่ในแม่น้ำคืนนี้แบบเรียลไทม์ (ไม่จำกัดจำนวน)</p>
         </div>
         <button id="closeBoardBtn" type="button" class="w-8 h-8 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition cursor-pointer">
           ✕
@@ -618,7 +618,7 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
     import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-    import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, increment, serverTimestamp, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, increment, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
     const KRATHONG_TYPES = [
       {
@@ -739,9 +739,7 @@
       'สายลม', 'น้ำค้าง', 'ใบไม้', 'จันทร์เจ้า', 'พราวแสง', 'คนริมน้ำ', 'ดาวเคียงเดือน', 'ละอองฝน'
     ];
 
-    // =========================================================================
-    // 👇 ค่า firebaseConfig จากโปรเจกต์ loy-krathong-online-c18a0 ของคุณ
-    // =========================================================================
+    // ค่า firebaseConfig จากโปรเจกต์ loy-krathong-online-c18a0
     const MANUAL_FIREBASE_CONFIG = {
       apiKey: "AIzaSyCgebbhRr3I5QTk1GGONPb7vPnVE96HNs4",
       authDomain: "loy-krathong-online-c18a0.firebaseapp.com",
@@ -789,7 +787,7 @@
 
     function persistLocalState() {
       try {
-        localStorage.setItem(STORAGE_KRATHONGS_KEY, JSON.stringify(localKrathongs.slice(0, 100)));
+        localStorage.setItem(STORAGE_KRATHONGS_KEY, JSON.stringify(localKrathongs));
         localStorage.setItem(STORAGE_LIKED_KEY, JSON.stringify([...likedIds]));
         localStorage.setItem(STORAGE_OWNED_KEY, JSON.stringify([...myOwnedIds]));
       } catch (e) {}
@@ -1095,9 +1093,8 @@
       document.getElementById('krathongPreviewDesc').textContent = info.desc;
     }
 
-    // --- 5. กระทงลอยบนสายน้ำ ---
+    // --- 5. กระทงลอยบนสายน้ำ (แสดงทั้งหมดไม่จำกัดจำนวน) ---
     const riverEntities = new Map();
-    const MAX_RIVER_KRATHONGS = 30;
 
     const RIVER_LANES = [
       { topPct: 10, scale: 0.78, speed: 24, zIndex: 12 },
@@ -1113,11 +1110,10 @@
 
     function syncRiverKrathongs(list) {
       const river = document.getElementById('riverLayer');
-      const visibleList = list.slice(0, MAX_RIVER_KRATHONGS);
-      const visibleIds = new Set(visibleList.map(item => item.id));
+      const allIds = new Set(list.map(item => item.id));
 
       riverEntities.forEach((entity, id) => {
-        if (!visibleIds.has(id)) {
+        if (!allIds.has(id)) {
           entity.el.remove();
           riverEntities.delete(id);
         }
@@ -1132,7 +1128,7 @@
       const topThreeIds = new Set(sortedByLikes.slice(0, 3).map(item => item.id));
 
       const findMyBtn = document.getElementById('findMyKrathongBtn');
-      const hasMyKrathongOnRiver = visibleList.some(item => myOwnedIds.has(item.id));
+      const hasMyKrathongOnRiver = list.some(item => myOwnedIds.has(item.id));
       if (hasMyKrathongOnRiver) {
         findMyBtn.classList.remove('hidden');
         findMyBtn.classList.add('flex');
@@ -1141,7 +1137,7 @@
         findMyBtn.classList.remove('flex');
       }
 
-      visibleList.forEach((k, index) => {
+      list.forEach((k, index) => {
         const typeInfo = getTypeInfo(k.type);
         const isMine = myOwnedIds.has(k.id);
         const isLiked = likedIds.has(k.id);
@@ -1597,7 +1593,7 @@
     function startRealtimeListener() {
       if (unsubscribeSnapshot) return;
       const colRef = collection(db, 'artifacts', appId, 'public', 'data', 'krathongs');
-      const q = query(colRef, orderBy('createdAt', 'desc'), limit(100));
+      const q = query(colRef, orderBy('createdAt', 'desc'));
 
       unsubscribeSnapshot = onSnapshot(
         q,
@@ -1619,7 +1615,7 @@
           console.warn('ใช้งานโหมดในเครื่องชั่วคราว:', error);
           isCloudSynced = false;
           document.getElementById('liveDot').className = 'inline-block w-2 h-2 rounded-full bg-amber-400 flex-none';
-          document.getElementById('statusText').textContent = 'โหมดในเครื่อง (ต้องใส่ค่า Firebase เพื่อซิงก์ข้ามเครื่อง)';
+          document.getElementById('statusText').textContent = 'โหมดในเครื่อง (ตรวจสอบสิทธิ์ Firestore)';
           handleKrathongsUpdated(localKrathongs);
         }
       );
@@ -1629,7 +1625,7 @@
       if (!isCloudEnabled) {
         isCloudSynced = false;
         document.getElementById('liveDot').className = 'inline-block w-2 h-2 rounded-full bg-amber-400 flex-none';
-        document.getElementById('statusText').textContent = 'โหมดในเครื่อง (ต้องใส่ค่า Firebase เพื่อซิงก์ข้ามเครื่อง)';
+        document.getElementById('statusText').textContent = 'โหมดในเครื่อง';
         handleKrathongsUpdated(localKrathongs);
         return;
       }
@@ -1651,7 +1647,7 @@
         console.warn('ไม่สามารถเชื่อมต่อระบบยืนยันตัวตนคลาวด์ได้ ใช้โหมดในเครื่อง:', err);
         isCloudSynced = false;
         document.getElementById('liveDot').className = 'inline-block w-2 h-2 rounded-full bg-amber-400 flex-none';
-        document.getElementById('statusText').textContent = 'โหมดในเครื่อง (ต้องใส่ค่า Firebase เพื่อซิงก์ข้ามเครื่อง)';
+        document.getElementById('statusText').textContent = 'โหมดในเครื่อง (เปิด Anonymous Auth ใน Firebase)';
         handleKrathongsUpdated(localKrathongs);
       }
     }
