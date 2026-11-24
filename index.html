@@ -378,31 +378,26 @@
 
     <!-- ปุ่มควบคุมบน Header -->
     <div class="flex items-center gap-1 sm:gap-2 flex-nowrap justify-end flex-none">
-      <!-- ปุ่มสปอตไลต์ค้นหากระทงของฉัน -->
       <button id="findMyKrathongBtn" type="button" class="hidden items-center justify-center gap-1 px-2 py-1.5 sm:px-3.5 sm:py-2 rounded-xl sm:rounded-2xl bg-yellow-400/20 hover:bg-yellow-400/30 border border-yellow-300/50 text-[11px] sm:text-xs font-semibold text-yellow-200 transition shadow cursor-pointer" title="ส่องไฟสปอตไลต์ไปยังกระทงของคุณ">
         <span>📍</span>
         <span class="hidden md:inline">กระทงของฉัน</span>
       </button>
 
-      <!-- ปุ่มเปิดโถเสี่ยงทายสไตล์ไทย (แสดงข้อความ "เสี่ยงทาย" ชัดเจนบนมือถือ) -->
       <button id="openChimModalBtn" type="button" class="flex items-center justify-center gap-1 px-2.5 py-1.5 sm:px-3.5 sm:py-2 rounded-xl sm:rounded-2xl bg-amber-500/25 hover:bg-amber-500/35 border border-amber-300/50 text-[11px] sm:text-xs font-semibold text-amber-200 transition shadow cursor-pointer whitespace-nowrap" title="เขย่าโถเสี่ยงทายลายไทย">
         <span>🪷</span>
         <span>เสี่ยงทาย</span>
       </button>
 
-      <!-- ปุ่มเปิด/ปิดเพลงบรรเลง -->
       <button id="toggleMusicBtn" type="button" class="flex items-center justify-center gap-1 p-1.5 sm:px-3.5 sm:py-2 rounded-xl sm:rounded-2xl bg-slate-900/70 hover:bg-slate-800/85 border border-amber-300/20 text-xs font-medium text-slate-200 transition shadow cursor-pointer" title="เปิด/ปิดเพลงบรรเลงทำนองวันเพ็ญเดือนสิบสอง">
         <span id="musicIcon">🎵</span>
         <span id="musicLabel" class="hidden sm:inline">เพลงบรรเลง</span>
       </button>
 
-      <!-- ปุ่มซ่อน/แสดงป้ายเหนือกระทง -->
       <button id="toggleLabelsBtn" type="button" class="hidden sm:flex items-center gap-1.5 px-3.5 py-2 rounded-2xl bg-slate-900/70 hover:bg-slate-800/85 border border-amber-300/20 text-xs font-medium text-slate-200 transition shadow cursor-pointer" title="ซ่อนหรือแสดงป้ายข้อความเหนือกระทง">
         <span id="labelToggleIcon">🏷️</span>
         <span id="labelToggleText" class="hidden md:inline">ซ่อนป้าย</span>
       </button>
 
-      <!-- ปุ่มเปิดกระดานรวมกระทง -->
       <button id="openBoardBtn" type="button" class="flex items-center gap-1 px-2.5 py-1.5 sm:px-3.5 sm:py-2 rounded-xl sm:rounded-2xl bg-slate-900/75 hover:bg-slate-800/85 border border-amber-300/30 text-[11px] sm:text-xs font-medium text-amber-100 transition shadow cursor-pointer whitespace-nowrap">
         <span>📜</span>
         <span>รวมกระทง</span>
@@ -410,7 +405,7 @@
     </div>
   </header>
 
-  <!-- ปุ่มลอยกระทงตรงกลางด้านล่าง (เด่นชัดและกดง่ายบนมือถือ) -->
+  <!-- ปุ่มลอยกระทงตรงกลางด้านล่าง -->
   <div class="fixed inset-x-0 bottom-4 sm:bottom-6 z-30 flex justify-center pointer-events-none px-4">
     <button id="openCreateModalBtn" type="button" class="pointer-events-auto flex items-center justify-center gap-2 px-6 py-3 sm:px-7 sm:py-3.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-bold text-sm sm:text-base shadow-[0_0_28px_rgba(251,191,36,0.55)] ring-2 ring-amber-100/60 transition transform active:scale-95 cursor-pointer">
       <span class="text-base sm:text-lg">🪷</span>
@@ -439,7 +434,6 @@
       </div>
 
       <form id="krathongForm" class="space-y-4">
-        <!-- พรีวิวกระทงขนาดใหญ่ -->
         <div class="rounded-2xl bg-gradient-to-b from-sky-950/70 to-slate-950/90 border border-amber-300/20 p-4 flex flex-col items-center justify-center relative overflow-hidden">
           <div class="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-sky-500/15 to-transparent pointer-events-none"></div>
           <div id="krathongPreviewGraphic" class="w-28 h-24 sm:w-32 sm:h-28 flex items-center justify-center krathong-bob-inner"></div>
@@ -448,19 +442,16 @@
           <div id="krathongPreviewDesc" class="text-[11px] text-slate-300/80 text-center mt-0.5 max-w-xs"></div>
         </div>
 
-        <!-- เลือกรูปแบบกระทง 4 แบบ -->
         <div>
           <label class="block text-xs font-medium text-amber-200/90 mb-2">เลือกรูปแบบกระทง</label>
           <div id="krathongTypeGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5"></div>
         </div>
 
-        <!-- ชื่อผู้ลอย -->
         <div>
           <label for="senderName" class="block text-xs font-medium text-amber-200/90 mb-1">ชื่อของคุณ</label>
           <input id="senderName" type="text" maxlength="24" placeholder="เช่น ปลายฟ้า หรือ นามปากกา" class="w-full px-3.5 py-2.5 rounded-2xl bg-slate-950/80 border border-slate-700/80 focus:border-amber-300/70 focus:outline-none text-sm text-white placeholder-slate-500" />
         </div>
 
-        <!-- ข้อความที่อยากฝากไปกับสายน้ำ -->
         <div>
           <div class="flex items-center justify-between mb-1">
             <label for="wishMessage" class="text-xs font-medium text-amber-200/90">ข้อความที่อยากฝากไปกับสายน้ำ</label>
@@ -468,7 +459,6 @@
           </div>
           <textarea id="wishMessage" rows="3" maxlength="140" required placeholder="พิมพ์สิ่งที่อยากฝากไว้กับสายน้ำคืนนี้..." class="w-full px-3.5 py-2.5 rounded-2xl bg-slate-950/80 border border-slate-700/80 focus:border-amber-300/70 focus:outline-none text-sm text-white placeholder-slate-500 resize-none"></textarea>
 
-          <!-- ปุ่มสุ่มข้อความ -->
           <div class="mt-2 flex items-center justify-between gap-2">
             <span class="text-[11px] text-slate-400">นึกไม่ออกลองกดสุ่มข้อความดูได้</span>
             <button id="randomWishBtn" type="button" class="px-3 py-1 rounded-xl bg-amber-400/15 hover:bg-amber-400/25 border border-amber-300/30 text-[11px] font-medium text-amber-200 transition cursor-pointer">
@@ -477,7 +467,6 @@
           </div>
         </div>
 
-        <!-- ปุ่มยืนยันลอยกระทง -->
         <button id="submitKrathongBtn" type="submit" class="w-full py-3 rounded-2xl bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-bold text-sm shadow-lg transition transform active:scale-[0.99] flex items-center justify-center gap-2 cursor-pointer">
           <span>🕯️</span>
           <span>ปล่อยกระทงลงสายน้ำ</span>
@@ -528,7 +517,6 @@
         </button>
       </div>
 
-      <!-- ช่องค้นหาและตัวกรองประเภทกระทง -->
       <div class="flex flex-col sm:flex-row gap-2 mb-3">
         <input id="searchWishInput" type="text" placeholder="ค้นหาชื่อหรือข้อความในสายน้ำ..." class="flex-1 px-3.5 py-2 rounded-2xl bg-slate-950/80 border border-slate-700/80 focus:border-amber-300/60 focus:outline-none text-xs sm:text-sm text-white placeholder-slate-500" />
         <select id="filterTypeSelect" class="px-3.5 py-2 rounded-2xl bg-slate-950/80 border border-slate-700/80 focus:border-amber-300/60 focus:outline-none text-xs sm:text-sm text-amber-100">
@@ -540,7 +528,6 @@
         </select>
       </div>
 
-      <!-- รายการกระทงทั้งหมด -->
       <div id="wishFeedList" class="flex-1 overflow-y-auto custom-scroll space-y-2.5 pr-1"></div>
     </div>
   </div>
@@ -560,7 +547,6 @@
         </button>
       </div>
 
-      <!-- พื้นที่โถเสี่ยงทายสไตล์ไทย -->
       <div class="rounded-2xl bg-slate-950/65 border border-amber-300/20 p-4 mb-4 flex flex-col items-center justify-center relative overflow-hidden">
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(251,191,36,0.16),transparent_70%)] pointer-events-none"></div>
 
@@ -674,13 +660,11 @@
     </div>
   </div>
 
-  <!-- Firebase & Application Logic -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
     import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
     import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, increment, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-    // ข้อมูลรูปแบบกระทงทั้ง 4 แบบ (ชื่อตัวละครอยู่บรรทัดบน ชื่อกระทงอยู่บรรทัดล่าง)
     const KRATHONG_TYPES = [
       {
         id: 'krathong-1',
@@ -773,7 +757,6 @@
       }
     ];
 
-    // คำทำนายประจำใบที่ 1 - 12 (โทนไทยละมุนเข้ากับคืนลอยกระทง)
     const FORTUNE_SLIPS = [
       { no: 1, grade: 'มงคลยิ่ง', title: 'จันทร์เพ็ญส่องทางสว่าง', poem: 'แสงจันทร์นวลส่องฟ้ากระจ่างใส เหมือนดวงใจที่พ้นหมอกเมฆหม่น สิ่งที่หวังตั้งใจไว้เริ่มเป็นผล ดั่งสายน้ำไหลรินสู่ทะเลกว้าง', advice: 'คืนวันเพ็ญนี้เหมาะแก่การเริ่มต้นสิ่งใหม่ กล้าตัดสินใจในเรื่องที่ลังเลอยู่ จะได้รับแรงสนับสนุนที่ดี' },
       { no: 2, grade: 'ดีมาก', title: 'สายลมแห่งโชคลาภ', poem: 'ลมโชยอ่อนพัดผ่านผิวน้ำเย็น ข่าวดีเด่นกำลังเคลื่อนมาใกล้ตัว มิตรภาพเก่าและใหม่พาเกื้อกูล ให้เดินหน้าด้วยใจที่เบาสบาย', advice: 'จะมีโอกาสหรือข่าวดีเข้ามาแบบไม่ทันตั้งตัว หมั่นยิ้มและเปิดรับการพูดคุยกับผู้คนรอบข้าง' },
@@ -789,7 +772,6 @@
       { no: 12, grade: 'มงคลยิ่ง', title: 'บริบูรณ์ครบถ้วนคืนวันเพ็ญ', poem: 'พระจันทร์เต็มดวงส่องสว่างทั่วหล้า ความสมบูรณ์พูนสุขมาบรรจบครบบริบูรณ์ ทั้งสุขกายสบายใจและเรื่องดีๆ ที่เฝ้ารอ ลอยล่องมาสมปรารถนาทุกประการ', advice: 'เป็นใบทำนายแห่งความสมบูรณ์และความสบายใจ เก็บเกี่ยวความสุขเล็กๆ รอบตัวและส่งต่อพลังบวกต่อไป' }
     ];
 
-    // ข้อความสุ่มแบบละมุนและเป็นธรรมชาติ
     const SAMPLE_WISHES = [
       'ขอให้ทุกคืนวันเต็มไปด้วยรอยยิ้มและใจที่สงบ',
       'ส่งความห่วงใยไปกับสายน้ำ ขอให้เจอแต่เรื่องดีๆ',
@@ -802,18 +784,36 @@
       'สายลม', 'น้ำค้าง', 'ใบไม้', 'จันทร์เจ้า', 'พราวแสง', 'คนริมน้ำ', 'ดาวเคียงเดือน', 'ละอองฝน'
     ];
 
-    // การตั้งค่า Firebase ตามสภาพแวดล้อม
+    // =========================================================================
+    // 👇 หากนำไปโฮสต์เว็บภายนอก (เช่น GitHub Pages / Cloudflare Pages / Netlify Drop)
+    //    ให้นำค่า firebaseConfig จาก Firebase Console มาใส่ใน MANUAL_FIREBASE_CONFIG
+    //    เพื่อให้ทุกคนที่เปิดลิงก์เห็นกระทงและยอดถูกใจแบบออนไลน์ข้ามเครื่องครับ
+    // =========================================================================
+    const MANUAL_FIREBASE_CONFIG = {
+      apiKey: "",
+      authDomain: "",
+      projectId: "",
+      storageBucket: "",
+      messagingSenderId: "",
+      appId: ""
+    };
+
     const hasInjectedFirebase = typeof __firebase_config !== 'undefined' && Boolean(__firebase_config);
+    const hasManualFirebase = Boolean(MANUAL_FIREBASE_CONFIG && MANUAL_FIREBASE_CONFIG.apiKey && MANUAL_FIREBASE_CONFIG.projectId);
+    const isCloudEnabled = hasInjectedFirebase || hasManualFirebase;
+
     const firebaseConfig = hasInjectedFirebase
       ? JSON.parse(__firebase_config)
-      : {
-          apiKey: 'demo-api-key',
-          authDomain: 'demo.firebaseapp.com',
-          projectId: 'loy-krathong-demo',
-          storageBucket: 'demo.appspot.com',
-          messagingSenderId: '000000000000',
-          appId: '1:000000000000:web:0000000000000000'
-        };
+      : hasManualFirebase
+        ? MANUAL_FIREBASE_CONFIG
+        : {
+            apiKey: 'demo-api-key',
+            authDomain: 'demo.firebaseapp.com',
+            projectId: 'loy-krathong-demo',
+            storageBucket: 'demo.appspot.com',
+            messagingSenderId: '000000000000',
+            appId: '1:000000000000:web:0000000000000000'
+          };
 
     const appId = typeof __app_id !== 'undefined' && __app_id ? __app_id : 'loy-krathong-online';
 
@@ -823,8 +823,25 @@
 
     let currentUser = null;
     let isCloudSynced = false;
-    let localKrathongs = [];
     let unsubscribeSnapshot = null;
+
+    const STORAGE_KRATHONGS_KEY = 'loy_krathong_local_items_v1';
+    const STORAGE_LIKED_KEY = 'loy_krathong_liked_ids_v1';
+    const STORAGE_OWNED_KEY = 'loy_krathong_owned_ids_v1';
+
+    let localKrathongs = JSON.parse(localStorage.getItem(STORAGE_KRATHONGS_KEY) || '[]');
+    const likedIds = new Set(JSON.parse(localStorage.getItem(STORAGE_LIKED_KEY) || '[]'));
+    const myOwnedIds = new Set(JSON.parse(localStorage.getItem(STORAGE_OWNED_KEY) || '[]'));
+
+    function persistLocalState() {
+      try {
+        localStorage.setItem(STORAGE_KRATHONGS_KEY, JSON.stringify(localKrathongs.slice(0, 60)));
+        localStorage.setItem(STORAGE_LIKED_KEY, JSON.stringify([...likedIds]));
+        localStorage.setItem(STORAGE_OWNED_KEY, JSON.stringify([...myOwnedIds]));
+      } catch (e) {
+        // ข้ามหากพื้นที่เก็บข้อมูลเต็ม
+      }
+    }
 
     // --- 1. ระบบเสียงเพลงบรรเลงทำนองวันเพ็ญเดือนสิบสอง (Web Audio API) ---
     class LoyKrathongMusicEngine {
@@ -948,7 +965,6 @@
       }
     }
 
-    // สร้างระลอกคลื่นและแสงสะท้อนเมื่อแตะผิวน้ำ
     function createTapWaterRipple(clientX, clientY) {
       const riverLayer = document.getElementById('riverLayer');
       if (!riverLayer) return;
@@ -1051,9 +1067,6 @@
     let drawnSlipNumber = null;
     let selectedFortuneSlipNo = 1;
     let spotlightTimer = null;
-
-    const likedIds = new Set();
-    const myOwnedIds = new Set();
 
     function showToast(msg) {
       const banner = document.getElementById('toastBanner');
@@ -1307,7 +1320,7 @@
       showToast(`ส่องสปอตไลต์ไปยังกระทงของ "${item ? item.name : 'คุณ'}" แล้ว 📍`);
     }
 
-    // --- 5b. ระบบกระบอกเซียมซีสไตล์ศาลเจ้าจีนโบราณ & กระดาน 1-12 ---
+    // --- 5b. ระบบกระบอกเสี่ยงทายสไตล์ไทย & กระดาน 1-12 ---
     function playChimShakeSound() {
       try {
         const AudioCtx = window.AudioContext || window.webkitAudioContext;
@@ -1403,7 +1416,6 @@
       `;
     }
 
-    // ลูปแอนิเมชันเคลื่อนที่จากขวาไปซ้ายอย่างนุ่มนวลและไม่ซ้อนทับกัน
     let lastFrameTime = performance.now();
     function animateRiverLoop(now) {
       const dt = Math.min((now - lastFrameTime) / 1000, 0.1);
@@ -1570,8 +1582,9 @@
       } else {
         likedIds.add(id);
       }
+      persistLocalState();
 
-      if (isCloudSynced && currentUser) {
+      if (isCloudSynced && currentUser && !String(id).startsWith('local-')) {
         try {
           const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'krathongs', id);
           await updateDoc(docRef, {
@@ -1584,6 +1597,7 @@
         localKrathongs = localKrathongs.map(item =>
           item.id === id ? { ...item, likes: Math.max(0, (item.likes || 0) + delta) } : item
         );
+        persistLocalState();
         handleKrathongsUpdated(localKrathongs);
       }
 
@@ -1639,7 +1653,7 @@
         (snapshot) => {
           isCloudSynced = true;
           document.getElementById('liveDot').className = 'inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-none';
-          document.getElementById('statusText').textContent = 'สายน้ำเรียลไทม์';
+          document.getElementById('statusText').textContent = 'สายน้ำออนไลน์เรียลไทม์';
 
           const docsData = [];
           snapshot.forEach((docSnap) => {
@@ -1654,17 +1668,17 @@
           console.warn('ใช้งานโหมดในเครื่องชั่วคราว:', error);
           isCloudSynced = false;
           document.getElementById('liveDot').className = 'inline-block w-2 h-2 rounded-full bg-amber-400 flex-none';
-          document.getElementById('statusText').textContent = 'โหมดในเครื่อง (ต้องเชื่อมคลาวด์เพื่อซิงก์ข้ามเครื่อง)';
+          document.getElementById('statusText').textContent = 'โหมดในเครื่อง (ตั้งค่า Firebase เพื่อซิงก์ข้ามเครื่อง)';
           handleKrathongsUpdated(localKrathongs);
         }
       );
     }
 
     async function initAuthAndData() {
-      if (!hasInjectedFirebase) {
+      if (!isCloudEnabled) {
         isCloudSynced = false;
         document.getElementById('liveDot').className = 'inline-block w-2 h-2 rounded-full bg-amber-400 flex-none';
-        document.getElementById('statusText').textContent = 'โหมดออฟไลน์ในเครื่อง';
+        document.getElementById('statusText').textContent = 'โหมดในเครื่อง (ตั้งค่า Firebase เพื่อซิงก์ข้ามเครื่อง)';
         handleKrathongsUpdated(localKrathongs);
         return;
       }
@@ -1686,7 +1700,7 @@
         console.warn('ไม่สามารถเชื่อมต่อระบบยืนยันตัวตนคลาวด์ได้ ใช้โหมดในเครื่อง:', err);
         isCloudSynced = false;
         document.getElementById('liveDot').className = 'inline-block w-2 h-2 rounded-full bg-amber-400 flex-none';
-        document.getElementById('statusText').textContent = 'โหมดออฟไลน์ในเครื่อง';
+        document.getElementById('statusText').textContent = 'โหมดในเครื่อง (ตั้งค่า Firebase เพื่อซิงก์ข้ามเครื่อง)';
         handleKrathongsUpdated(localKrathongs);
       }
     }
@@ -1704,10 +1718,8 @@
       const fortuneBoardModal = document.getElementById('fortuneBoardModal');
       const wishInput = document.getElementById('wishMessage');
 
-      // ปุ่มสปอตไลต์หากระทงของฉัน
       document.getElementById('findMyKrathongBtn').addEventListener('click', focusMyKrathong);
 
-      // ปุ่มซ่อน/แสดงป้ายเหนือกระทง
       document.getElementById('toggleLabelsBtn').addEventListener('click', () => {
         labelsHidden = !labelsHidden;
         document.getElementById('labelToggleText').textContent = labelsHidden ? 'แสดงป้าย' : 'ซ่อนป้าย';
@@ -1717,7 +1729,6 @@
         showToast(labelsHidden ? 'ซ่อนป้ายเหนือกระทงแล้ว' : 'แสดงป้ายเหนือกระทงแล้ว');
       });
 
-      // เปิด-ปิดกระบอกเซียมซีสไตล์จีน
       document.getElementById('openChimModalBtn').addEventListener('click', () => {
         chimModal.classList.remove('hidden');
         chimModal.classList.add('flex');
@@ -1738,7 +1749,6 @@
       document.getElementById('chimTubeWrapper').addEventListener('click', shakeChineseChimTube);
       document.getElementById('shakeChimBtn').addEventListener('click', shakeChineseChimTube);
 
-      // เปิด-ปิดกระดานคำทำนายเซียมซี 1-12
       function openFortuneBoard() {
         renderFortuneBoard();
         fortuneBoardModal.classList.remove('hidden');
@@ -1764,7 +1774,6 @@
         }
       });
 
-      // เปิด-ปิด Modal สร้างกระทง
       document.getElementById('openCreateModalBtn').addEventListener('click', () => {
         createModal.classList.remove('hidden');
         createModal.classList.add('flex');
@@ -1783,19 +1792,16 @@
         }
       });
 
-      // ตัวนับจำนวนตัวอักษร
       wishInput.addEventListener('input', () => {
         document.getElementById('charCounter').textContent = `${wishInput.value.length}/140`;
       });
 
-      // ปุ่มสุ่มข้อความ
       document.getElementById('randomWishBtn').addEventListener('click', () => {
         const randomWish = SAMPLE_WISHES[Math.floor(Math.random() * SAMPLE_WISHES.length)];
         wishInput.value = randomWish;
         document.getElementById('charCounter').textContent = `${randomWish.length}/140`;
       });
 
-      // ส่งฟอร์มปล่อยกระทง
       document.getElementById('krathongForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const nameInput = document.getElementById('senderName');
@@ -1824,6 +1830,7 @@
               createdAt: serverTimestamp()
             });
             myOwnedIds.add(docRef.id);
+            persistLocalState();
           } else {
             const newId = 'local-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6);
             myOwnedIds.add(newId);
@@ -1835,6 +1842,7 @@
               likes: 0,
               createdAt: Date.now()
             });
+            persistLocalState();
             handleKrathongsUpdated(localKrathongs);
           }
 
@@ -1854,7 +1862,6 @@
         }
       });
 
-      // ปุ่มถูกใจใน Modal รายละเอียด
       document.getElementById('detailLikeBtn').addEventListener('click', () => {
         if (activeDetailId) {
           toggleLikeKrathong(activeDetailId);
@@ -1868,7 +1875,6 @@
         }
       });
 
-      // เปิด-ปิดกระดานกระทงทั้งหมด
       document.getElementById('openBoardBtn').addEventListener('click', openBoardModal);
       document.getElementById('closeBoardBtn').addEventListener('click', closeBoardModal);
       boardDrawer.addEventListener('click', (e) => {
@@ -1887,7 +1893,6 @@
         renderWishBoard();
       });
 
-      // ปุ่มเปิด/ปิดเพลงบรรเลง
       document.getElementById('toggleMusicBtn').addEventListener('click', () => {
         const playing = musicEngine.toggle();
         document.getElementById('musicIcon').textContent = playing ? '🎶' : '🎵';
